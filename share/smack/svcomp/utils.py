@@ -293,6 +293,32 @@ def verify_bpl_svcomp(args):
     else:
       heurTrace += "LDV benchmark detected. Setting loop unroll bar to 13.\n"
       loopUnrollBar = 13
+    corral_command += ["/bopt:coalesceBlocks:0"]
+    corral_command += ["/bopt:liveVariableAnalysis:0"]
+    corral_command += ["/bopt:monomorphize"]
+    corral_command += ["/bopt:removeEmptyBlocks:0"]
+    corral_command += ["/bopt:subsumption:0"]
+    corral_command += ["/bopt:typeEncoding:p"]
+    corral_command += ["/bopt:vc:n"]
+    corral_command += ["/bopt:z3lets:0"]
+    corral_command += ["/bopt:z3opt:NNF.SK_HACK=true"]
+    corral_command += ["/bopt:z3opt:SMT.ARITH.RANDOM_INITIAL_VALUE=true"]
+    corral_command += ["/bopt:z3opt:SMT.ARRAY.EXTENSIONAL=false"]
+    corral_command += ["/bopt:z3opt:SMT.ARRAY.WEAK=true"]
+    corral_command += ["/bopt:z3opt:SMT.BV.REFLECT=true"]
+    corral_command += ["/bopt:z3opt:SMT.CASE_SPLIT=3"]
+    corral_command += ["/bopt:z3opt:SMT.DELAY_UNITS=true"]
+    corral_command += ["/bopt:z3opt:SMT.MBQI=true"]
+    corral_command += ["/bopt:z3opt:SMT.MBQI.MAX_ITERATIONS=1000"]
+    corral_command += ["/bopt:z3opt:SMT.PHASE_SELECTION=0"]
+    corral_command += ["/bopt:z3opt:SMT.QI.EAGER_THRESHOLD=100"]
+    corral_command += ["/bopt:z3opt:SMT.RELEVANCY=2"]
+    corral_command += ["/bopt:z3opt:SMT.RESTART_FACTOR=1.5"]
+    corral_command += ["/bopt:z3opt:SMT.RESTART_STRATEGY=0"]
+    corral_command += ["/bopt:z3types"]
+    corral_command += ["/di"]
+    corral_command += ["/trackAllVars"]
+    corral_command += ["/useArrayTheory"]
     staticLoopBound = 64
   elif "standard_strcpy_false-valid-deref_ground_true-termination" in bpl or "960521-1_false-valid-free" in bpl or "960521-1_false-valid-deref" in bpl or "lockfree-3.3" in bpl or "list-ext_false-unreach-call_false-valid-deref" in bpl:
     heurTrace += "Memory safety benchmark detected. Setting loop unroll bar to 129.\n"
